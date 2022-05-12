@@ -1,5 +1,6 @@
+import 'package:azapp/config/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:azapp/models/models.dart';
+import 'package:azapp/models/models/models.dart';
 import 'package:azapp/widgets/widgets.dart';
 
 class UserCard extends StatelessWidget {
@@ -27,28 +28,21 @@ class UserCard extends StatelessWidget {
                     fit: BoxFit.cover,
                     image: NetworkImage(user.imageUrls[0]),
                   ),
-                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 4,
                       blurRadius: 4,
-                      offset: Offset(3, 3),
+                      offset: const Offset(3, 3),
                     )
                   ],
                 ),
               ),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                  gradient: LinearGradient(
-                    colors: [
-                      Color.fromARGB(200, 0, 0, 0),
-                      Color.fromARGB(0, 0, 0, 0)
-                    ],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                  ),
+                  gradient: AppColors.userPhotoGradient,
                 ),
               ),
               Positioned(
@@ -59,36 +53,32 @@ class UserCard extends StatelessWidget {
                   children: [
                     Text(
                       '${user.name}, ${user.age}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline2!
-                          .copyWith(color: Colors.white),
+                      style: AppColors.largeHeadline.copyWith(
+                        color: Colors.white,
+                      ),
                     ),
                     Text(
                       user.jobTitle,
-                      style: Theme.of(context).textTheme.headline3!.copyWith(
-                          color: Colors.white, fontWeight: FontWeight.normal),
+                      style: AppColors.headline.copyWith(
+                          color: Colors.white,
+                          height: 1.4,
+                          fontWeight: FontWeight.normal),
                     ),
                     Row(
                       children: [
-                        UserImageSmall(url: user.imageUrls[1]),
-                        UserImageSmall(url: user.imageUrls[2]),
-                        UserImageSmall(url: user.imageUrls[3]),
-                        UserImageSmall(url: user.imageUrls[4]),
-                        SizedBox(width: 10),
-                        Container(
-                          width: 35,
-                          height: 35,
-                          child: Icon(
-                            Icons.info_outline,
-                            size: 25,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
+                        Wrap(
+                          children: List.generate(
+                            4,
+                            (index) =>
+                                UserImageSmall(url: user.imageUrls[index]),
                           ),
                         ),
+                        const SizedBox(width: 10),
+                        const Icon(
+                          Icons.info_rounded,
+                          size: 25,
+                          color: AppColors.whiteColor,
+                        )
                       ],
                     ),
                   ],

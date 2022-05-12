@@ -19,6 +19,11 @@ class AppColors {
     height: 16 / 20,
     fontWeight: FontWeight.w500,
   );
+  static const smHeadline = TextStyle(
+    fontSize: 18,
+    height: 16 / 20,
+    fontWeight: FontWeight.normal,
+  );
   static const subTitle = TextStyle(
     fontSize: 16,
     height: 13 / 16,
@@ -85,6 +90,13 @@ class AppColors {
     Color.fromRGBO(233, 242, 255, 1),
     Color.fromRGBO(244, 240, 255, 1),
   ]);
+
+  static const userPhotoGradient = LinearGradient(colors: [
+    Color.fromARGB(200, 0, 0, 0),
+    Color.fromARGB(0, 0, 0, 0)
+  ],
+    begin: Alignment.bottomCenter,
+    end: Alignment.topCenter,);
 
   /// Application [Gradient] colors
   static const mainGradient = LinearGradient(colors: [

@@ -3,13 +3,14 @@ import 'package:azapp/widgets/widgets.dart';
 
 import 'onboarding_screens/screens.dart';
 
-class OnboardingScreen extends StatelessWidget {
+class OnBoardingScreen extends StatelessWidget {
+  const OnBoardingScreen({Key? key}) : super(key: key);
   static const String routeName = '/onboarding';
 
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
-      builder: (context) => OnboardingScreen(),
+      settings: const RouteSettings(name: routeName),
+      builder: (context) => const OnBoardingScreen(),
     );
   }
 

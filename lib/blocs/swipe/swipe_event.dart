@@ -10,7 +10,7 @@ abstract class SwipeEvent extends Equatable {
 class LoadUsersEvent extends SwipeEvent {
   final List<User> users;
 
-  LoadUsersEvent({
+  const LoadUsersEvent({
     required this.users,
   });
 
@@ -21,7 +21,7 @@ class LoadUsersEvent extends SwipeEvent {
 class SwipeLeftEvent extends SwipeEvent {
   final User user;
 
-  SwipeLeftEvent({
+  const SwipeLeftEvent({
     required this.user,
   });
 
@@ -32,7 +32,7 @@ class SwipeLeftEvent extends SwipeEvent {
 class SwipeRightEvent extends SwipeEvent {
   final User user;
 
-  SwipeRightEvent({
+  const SwipeRightEvent({
     required this.user,
   });
 

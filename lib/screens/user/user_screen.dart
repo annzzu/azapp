@@ -1,24 +1,26 @@
+import 'package:azapp/config/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:azapp/blocs/swipe/swipe_bloc.dart';
-import 'package:azapp/models/models.dart';
+import 'package:azapp/models/models/models.dart';
 import 'package:azapp/widgets/widgets.dart';
 
+import '../../widgets/widgets/text/container_text.dart';
+
 class UsersScreen extends StatelessWidget {
+  const UsersScreen({
+    Key? key, required this.user
+  }) : super(key: key);
   static const String routeName = '/users';
 
   static Route route({required User user}) {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
+      settings: const RouteSettings(name: routeName),
       builder: (context) => UsersScreen(user: user),
     );
   }
 
   final User user;
-
-  const UsersScreen({
-    required this.user,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +63,7 @@ class UsersScreen extends StatelessWidget {
                     child: BlocBuilder<SwipeBloc, SwipeState>(
                       builder: (context, state) {
                         if (state is SwipeLoading) {
-                          return Center(
+                          return const Center(
                             child: CircularProgressIndicator(),
                           );
                         }
@@ -71,32 +73,30 @@ class UsersScreen extends StatelessWidget {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  context.read<SwipeBloc>()
-                                    ..add(
-                                        SwipeRightEvent(user: state.users[0]));
+                                  context.read<SwipeBloc>().add(
+                                      SwipeRightEvent(user: state.users[0]));
                                   Navigator.pop(context);
                                   print('Swiped Right');
                                 },
-                                child: ChoiceButton(
-                                  color: Theme.of(context).accentColor,
+                                child: const ChoiceButton(
+                                  color: AppColors.scarletRed,
                                   icon: Icons.clear_rounded,
                                 ),
                               ),
                               InkWell(
                                 onTap: () {
-                                  context.read<SwipeBloc>()
-                                    ..add(
-                                        SwipeRightEvent(user: state.users[0]));
+                                  context.read<SwipeBloc>().add(
+                                      SwipeRightEvent(user: state.users[0]));
                                   Navigator.pop(context);
                                   print('Swiped Left');
                                 },
-                                child: ChoiceButton(
+                                child: const ChoiceButton(
                                   width: 80,
                                   height: 80,
                                   size: 30,
                                   color: Colors.white,
                                   hasGradient: true,
-                                  icon: Icons.favorite,
+                                  icon: Icons.favorite_rounded,
                                 ),
                               ),
                               ChoiceButton(
@@ -106,7 +106,7 @@ class UsersScreen extends StatelessWidget {
                             ],
                           );
                         } else {
-                          return Text('Something went wrong.');
+                          return const Text('Something went wrong.');
                         }
                       },
                     ),
@@ -122,47 +122,30 @@ class UsersScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('${user.name}, ${user.age}',
-                    style: Theme.of(context).textTheme.headline2),
+                    style: AppColors.largeHeadlineSec),
+                const SizedBox(height: 5),
                 Text(
                   user.jobTitle,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline3!
-                      .copyWith(fontWeight: FontWeight.normal),
+                  style: AppColors.smHeadline,
                 ),
-                SizedBox(height: 15),
-                Text('About', style: Theme.of(context).textTheme.headline3),
-                Text(user.bio,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .copyWith(height: 2)),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
+                Text('About',
+                    style: AppColors.smHeadline.copyWith(
+                      fontWeight: FontWeight.bold,
+                    )),
+                Text(user.bio, style: AppColors.bodyText.copyWith(height: 1.5)),
+                const SizedBox(height: 20),
                 Text('Interests', style: Theme.of(context).textTheme.headline3),
-                Row(
-                  children: user.interests
-                      .map((interest) => Container(
-                            padding: const EdgeInsets.all(8.0),
-                            margin: const EdgeInsets.only(top: 5.0, right: 5.0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                              gradient: LinearGradient(
-                                colors: [
-                                  Theme.of(context).primaryColor,
-                                  Theme.of(context).accentColor,
-                                ],
-                              ),
-                            ),
-                            child: Text(
-                              interest,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline6!
-                                  .copyWith(color: Colors.white),
-                            ),
-                          ))
-                      .toList(),
-                ),
+                SizedBox(
+                  height: 40,
+                  child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: user.interests.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, idx) {
+                        return ContainerText(text: user.interests[idx]);
+                      }),
+                )
               ],
             ),
           ),

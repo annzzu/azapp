@@ -5,14 +5,16 @@ import 'package:azapp/config/app_router.dart';
 import 'package:azapp/screens/screens.dart';
 
 import 'config/theme.dart';
-import 'models/models.dart';
+import 'models/models/models.dart';
 import 'screens/home/home_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -25,11 +27,11 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Dating App',
+        title: 'AZApp',
         debugShowCheckedModeBanner: false,
         theme: theme(),
         onGenerateRoute: AppRouter.onGenerateRoute,
-        initialRoute: HomeScreen.routeName,
+        initialRoute: OnBoardingScreen.routeName,
       ),
     );
   }

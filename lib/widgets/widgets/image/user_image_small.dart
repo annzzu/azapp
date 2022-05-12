@@ -23,7 +23,7 @@ class UserImageSmall extends StatelessWidget {
           fit: BoxFit.cover,
           image: NetworkImage(url),
         ),
-        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
         color: Theme.of(context).primaryColor,
       ),
     );

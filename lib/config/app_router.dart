@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:azapp/models/models.dart';
+import 'package:azapp/models/models/models.dart';
 import 'package:azapp/screens/screens.dart';
 
 class AppRouter {
@@ -14,8 +14,8 @@ class AppRouter {
         return HomeScreen.route();
       case UsersScreen.routeName:
         return UsersScreen.route(user: settings.arguments as User);
-      case OnboardingScreen.routeName:
-        return OnboardingScreen.route();
+      case OnBoardingScreen.routeName:
+        return OnBoardingScreen.route();
       default:
         return _errorRoute();
     }

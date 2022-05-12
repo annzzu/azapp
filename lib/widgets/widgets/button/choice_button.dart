@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../config/theme/app_colors.dart';
+
 class ChoiceButton extends StatelessWidget {
   final double width;
   final double height;
@@ -31,28 +33,15 @@ class ChoiceButton extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         gradient: hasGradient
-            ? LinearGradient(
-                colors: [
-                  Theme.of(context).primaryColor,
-                  Theme.of(context).accentColor,
-                ],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              )
-            : LinearGradient(
-                colors: [
-                  Colors.white,
-                  Colors.white,
-                ],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
+            ? AppColors.redGradient
+            : null,
+        color: hasGradient ? null : AppColors.whiteColor,
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
             spreadRadius: 4,
             blurRadius: 4,
-            offset: Offset(3, 3),
+            offset: const Offset(3, 3),
           ),
         ],
       ),
