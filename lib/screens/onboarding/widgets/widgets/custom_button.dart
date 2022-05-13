@@ -1,3 +1,4 @@
+import 'package:azapp/config/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -15,12 +16,7 @@ class CustomButton extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        gradient: LinearGradient(
-          colors: [
-            Theme.of(context).accentColor,
-            Theme.of(context).primaryColor,
-          ],
-        ),
+        gradient: AppColors.redGradient,
       ),
       child: ElevatedButton(
         onPressed: () {
@@ -30,15 +26,12 @@ class CustomButton extends StatelessWidget {
           primary: Colors.transparent,
           elevation: 0,
         ),
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           child: Center(
             child: Text(
               text,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline4!
-                  .copyWith(color: Colors.white),
+              style: AppColors.smHeadline.copyWith(color: AppColors.whiteColor),
             ),
           ),
         ),

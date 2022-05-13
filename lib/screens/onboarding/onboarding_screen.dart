@@ -34,8 +34,8 @@ class OnBoardingScreen extends StatelessWidget {
           if (!tabController.indexIsChanging) {}
         });
         return Scaffold(
-          appBar: CustomAppBar(
-            title: 'ARROW',
+          appBar: const CustomAppBar(
+            title: 'Welcome',
             hasActions: false,
           ),
           body: TabBarView(

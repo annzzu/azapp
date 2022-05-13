@@ -7,6 +7,11 @@ class AppColors {
     height: 30 / 28,
     fontWeight: FontWeight.w500,
   );
+  static const vLargeHeadline = TextStyle(
+    fontSize: 36,
+    height: 35 / 28,
+    fontWeight: FontWeight.normal,
+  );
 
   ///Application [Text] Styles
   static const largeHeadlineSec = TextStyle(
@@ -83,6 +88,7 @@ class AppColors {
   static const whiteColor = Color.fromRGBO(255, 255, 255, 1);
   static const seaGreenCrayola = Color.fromRGBO(88, 244, 188, 1);
   static const scarletRed = Color.fromRGBO(245, 92, 61, 1);
+  static const mainRed = Color.fromRGBO(135, 35, 18, 1.0);
   static const lightBlue = Color.fromRGBO(233, 242, 255, 1);
 
   /// Application [Gradient] colors

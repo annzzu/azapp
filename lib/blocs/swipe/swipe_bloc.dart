@@ -41,5 +41,4 @@ class SwipeBloc extends Bloc<SwipeEvent, SwipeState> {
       } catch (_) {}
     }
   }
-
 }

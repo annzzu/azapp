@@ -17,10 +17,10 @@ class CustomTextField extends StatelessWidget {
             fillColor: Colors.white,
             hintText: hint,
             contentPadding: const EdgeInsets.only(bottom: 5.0, top: 12.5),
-            focusedBorder: OutlineInputBorder(
+            focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.white),
             ),
-            enabledBorder: UnderlineInputBorder(
+            enabledBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.white),
             ),
           ),

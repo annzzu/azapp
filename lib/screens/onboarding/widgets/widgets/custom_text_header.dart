@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../config/theme/app_colors.dart';
+
 class CustomTextHeader extends StatelessWidget {
   final String text;
 
@@ -12,9 +14,7 @@ class CustomTextHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: Theme.of(context).textTheme.headline1!.copyWith(
-            fontWeight: FontWeight.normal,
-          ),
+      style: AppColors.vLargeHeadline,
     );
   }
 }

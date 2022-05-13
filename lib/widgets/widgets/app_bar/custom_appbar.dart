@@ -1,4 +1,4 @@
-import 'package:azapp/config_ffff/route_helper.dart';
+import 'package:azapp/config/route_helper.dart';
 import 'package:flutter/material.dart';
 import '../../../config/theme/app_colors.dart';
 
@@ -23,7 +23,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         margin: const EdgeInsets.all(10),
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
-          gradient: AppColors.mainGradient,
+          gradient: AppColors.redGradient,
         ),
         child: const Icon(
           Icons.pets_sharp,
