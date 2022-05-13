@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:azapp/models/models/models.dart';
+import 'package:azapp/models/models.dart';
 import 'package:azapp/screens/screens.dart';
 
 class AppRouter {
@@ -16,6 +16,10 @@ class AppRouter {
         return UsersScreen.route(user: settings.arguments as User);
       case OnBoardingScreen.routeName:
         return OnBoardingScreen.route();
+      case MatchesScreen.routeName:
+        return MatchesScreen.route();
+      case ChatScreen.routeName:
+        return ChatScreen.route(userMatch: settings.arguments as UserMatch);
       default:
         return _errorRoute();
     }
@@ -23,8 +27,8 @@ class AppRouter {
 
   static Route _errorRoute() {
     return MaterialPageRoute(
-      builder: (_) => Scaffold(appBar: AppBar(title: Text('error'))),
-      settings: RouteSettings(name: '/error'),
+      builder: (_) => Scaffold(appBar: AppBar(title: const Text('error'))),
+      settings: const RouteSettings(name: '/error'),
     );
   }
 }

@@ -1,19 +1,19 @@
 import 'package:equatable/equatable.dart';
 
-import 'models.dart';
+import '../models.dart';
 
 class UserMatch extends Equatable {
-  final int id;
-  final int userId;
-  final User matchedUser;
-  final List<Chat>? chat;
-
   const UserMatch({
     required this.id,
     required this.userId,
     required this.matchedUser,
     required this.chat,
   });
+
+  final int id;
+  final int userId;
+  final User matchedUser;
+  final List<Chat>? chat;
 
   @override
   List<Object?> get props => [id, userId, matchedUser];
@@ -81,6 +81,14 @@ class UserMatch extends Equatable {
       matchedUser: User.users[8],
       chat: Chat.chats
           .where((chat) => chat.userId == 1 && chat.matchedUserId == 9)
+          .toList(),
+    ),
+    UserMatch(
+      id: 9,
+      userId: 1,
+      matchedUser: User.users[9],
+      chat: Chat.chats
+          .where((chat) => chat.userId == 1 && chat.matchedUserId == 10)
           .toList(),
     ),
   ];

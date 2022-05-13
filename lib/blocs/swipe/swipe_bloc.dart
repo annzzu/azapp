@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:azapp/models/models/models.dart';
+import 'package:azapp/models/models.dart';
 
-import '../../models/user_model.dart';
+import '../../models/models/user_model.dart';
 
 part 'swipe_event.dart';
 

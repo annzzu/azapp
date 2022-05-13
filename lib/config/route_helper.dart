@@ -7,8 +7,9 @@ class RouteHelper {
   static String users = "/users";
   static String matches = "/matches";
   static String profile = "/profile";
+  static String chat = "/chat";
 
   static Map<String, WidgetBuilder> routes() => {
-    home: (_) =>  HomeScreen(),
+    home: (_) =>  const HomeScreen(),
   };
 }

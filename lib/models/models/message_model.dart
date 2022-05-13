@@ -2,14 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 
 class Message extends Equatable {
-  final int id;
-  final int senderId;
-  final int receiverId;
-  final String message;
-  final DateTime dateTime;
-  final String timeString;
-
-  Message({
+  const Message({
     required this.id,
     required this.senderId,
     required this.receiverId,
@@ -17,6 +10,13 @@ class Message extends Equatable {
     required this.dateTime,
     required this.timeString,
   });
+
+  final int id;
+  final int senderId;
+  final int receiverId;
+  final String message;
+  final DateTime dateTime;
+  final String timeString;
 
   @override
   List<Object?> get props => [
@@ -33,7 +33,7 @@ class Message extends Equatable {
         id: 1,
         senderId: 1,
         receiverId: 2,
-        message: 'Hey, how are you?',
+        message: 'Hey, how are you? first',
         dateTime: DateTime.now(),
         timeString: DateFormat('jm').format(DateTime.now())),
     Message(
@@ -104,6 +104,20 @@ class Message extends Equatable {
         senderId: 7,
         receiverId: 1,
         message: 'I\'m good, thank you.',
+        dateTime: DateTime.now(),
+        timeString: DateFormat('jm').format(DateTime.now())),
+    Message(
+        id: 12,
+        senderId: 1,
+        receiverId: 10,
+        message: 'I\'m good, thank you.',
+        dateTime: DateTime.now(),
+        timeString: DateFormat('jm').format(DateTime.now())),
+    Message(
+        id: 13,
+        senderId: 2,
+        receiverId: 1,
+        message: 'That\'s good',
         dateTime: DateTime.now(),
         timeString: DateFormat('jm').format(DateTime.now())),
   ];

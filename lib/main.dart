@@ -5,7 +5,7 @@ import 'package:azapp/config/app_router.dart';
 import 'package:azapp/screens/screens.dart';
 
 import 'config/theme.dart';
-import 'models/models/models.dart';
+import 'models/models.dart';
 import 'screens/home/home_screen.dart';
 
 void main() {
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: theme(),
         onGenerateRoute: AppRouter.onGenerateRoute,
-        initialRoute: OnBoardingScreen.routeName,
+        initialRoute: MatchesScreen.routeName,
       ),
     );
   }

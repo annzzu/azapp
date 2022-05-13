@@ -49,7 +49,7 @@ class AppColors {
 
   ///This style is not in design
   static const smallerSubText = TextStyle(
-    fontSize: 10,
+    fontSize: 12,
     height: 12 / 10,
     fontWeight: FontWeight.normal,
   );

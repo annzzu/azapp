@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../config/theme/app_colors.dart';
 
 class SplashScreen extends StatelessWidget {
+  const SplashScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                'assets/logo.svg',
-                height: 100,
-              ),
-              SizedBox(height: 20),
-              Text(
-                'ARROW',
-                style: Theme.of(context).textTheme.headline1,
-              )
-            ],
-          ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.pets_rounded,
+              size: 200,
+              color: AppColors.mainRed,
+            ),
+            const SizedBox(height: 20),
+            Text(
+              'AZAPP',
+              style: Theme.of(context).textTheme.headline1,
+            )
+          ],
         ),
       ),
     );

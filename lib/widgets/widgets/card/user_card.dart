@@ -1,6 +1,6 @@
 import 'package:azapp/config/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:azapp/models/models/models.dart';
+import 'package:azapp/models/models.dart';
 import 'package:azapp/widgets/widgets.dart';
 
 class UserCard extends StatelessWidget {
