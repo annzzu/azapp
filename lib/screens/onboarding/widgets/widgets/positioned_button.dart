@@ -13,6 +13,7 @@ class PositionedButton extends StatelessWidget {
     required this.currentStep,
     required this.tabController,
     this.text = 'NEXT STEP',
+    this.function,
   }) : super(key: key);
   final double bottomHeight;
   final double horizontalWidth;
@@ -20,6 +21,7 @@ class PositionedButton extends StatelessWidget {
   final int currentStep;
   final TabController tabController;
   final String text;
+  final void function;
 
   @override
   Widget build(BuildContext context) {

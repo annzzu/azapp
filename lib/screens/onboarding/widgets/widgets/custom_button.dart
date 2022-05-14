@@ -1,15 +1,34 @@
 import 'package:azapp/config/theme/app_colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../cubits/singup/signup_cubit.dart';
 
 class CustomButton extends StatelessWidget {
-  final TabController tabController;
-  final String text;
-
   const CustomButton({
     Key? key,
     required this.tabController,
     required this.text,
+    this.emailController,
+    this.passwordController,
+    this.function,
   }) : super(key: key);
+  final TabController tabController;
+  final String text;
+  final TextEditingController? emailController;
+  final TextEditingController? passwordController;
+  final void function;
+
+  userAdded(BuildContext context, UserCredential value) {
+    print("User Added");
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        elevation: 1,
+        content: Text('User Added: ${value.user?.email}'),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +39,12 @@ class CustomButton extends StatelessWidget {
       ),
       child: ElevatedButton(
         onPressed: () {
+          if (tabController.index == 1) {
+            context.read<SignupCubit>().signUpWithCredentials();
+            print(
+                "წაიკითხა და კარგად არის ${context.read<SignupCubit>().state.status}");
+          }
+
           tabController.animateTo(tabController.index + 1);
         },
         style: ElevatedButton.styleFrom(
@@ -39,3 +64,67 @@ class CustomButton extends StatelessWidget {
     );
   }
 }
+// switchCases(BuildContext context, dynamic onError) {
+//   String errorMessage = 'Failed to Add User';
+//   if (onError is FirebaseAuthException)
+//   switch (onError.code) {
+//     case "email-already-in-use":
+//       errorMessage = onError.message;
+//       break;
+//     case "ERROR_INVALID_EMAIL":
+//       errorMessage = "Your email address appears to be malformed.";
+//       break;
+//     case "ERROR_WRONG_PASSWORD":
+//       errorMessage = "Your password is wrong.";
+//       break;
+//     case "ERROR_USER_NOT_FOUND":
+//       errorMessage = "User with this email doesn't exist.";
+//       break;
+//     case "ERROR_USER_DISABLED":
+//       errorMessage = "User with this email has been disabled.";
+//       break;
+//     case "ERROR_TOO_MANY_REQUESTS":
+//       errorMessage = "Too many requests. Try again later.";
+//       break;
+//     case "ERROR_OPERATION_NOT_ALLOWED":
+//       errorMessage = "Signing in with Email and Password is not enabled.";
+//       break;
+//     default:
+//       errorMessage = errorMessage;
+//   }
+//   print(onError.code);
+//   print(onError);
+//   return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//     elevation: 1,
+//     content: Text(errorMessage),
+//   ));
+// }
+// if (emailController != null && passwordController != null) {
+//   // await FirebaseAuth.instance
+//   //     .createUserWithEmailAndPassword(
+//   //       email: emailController!.text,
+//   //       password: passwordController!.text,
+//   //     )
+//   //     .then((value) => userAdded(context, value))
+//   // .catchError((e)=> print('failed'));
+//   // await FirebaseAuth.instance
+//   //     .createUserWithEmailAndPassword(
+//   //   email: emailController!.text,
+//   //   password: passwordController!.text,
+//   // )
+//   //     .then((value) {
+//   //   print("User Added");
+//   //   ScaffoldMessenger.of(context).showSnackBar(
+//   //     SnackBar(
+//   //       elevation: 1,
+//   //       content: Text('User Added: ${value.user?.email}'),
+//   //     ),
+//   //   );
+//   // }).catchError((signUpError) {
+//   //   if (signUpError.code == 'email-already-in-use') {
+//   //     print("უკვე დარეგისტრირებული");
+//   //   } else {
+//   //     print("Failed to Add User");
+//   //   }
+//   // });
+// }

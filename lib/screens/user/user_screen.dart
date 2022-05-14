@@ -5,7 +5,6 @@ import 'package:azapp/blocs/swipe/swipe_bloc.dart';
 import 'package:azapp/models/models.dart';
 import 'package:azapp/widgets/widgets.dart';
 
-import '../../widgets/widgets/text/container_text.dart';
 
 class UsersScreen extends StatelessWidget {
   const UsersScreen({

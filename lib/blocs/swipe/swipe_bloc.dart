@@ -12,7 +12,7 @@ part 'swipe_state.dart';
 
 class SwipeBloc extends Bloc<SwipeEvent, SwipeState> {
   SwipeBloc() : super(SwipeLoading()) {
-    on<LoadUsersEvent>((event, emit) => _mapLoadUsersToState(event, emit));
+    on<LoadUsersEvent>( _mapLoadUsersToState);
     on<SwipeLeftEvent>(
         (event, emit) => _mapSwipeLeftEventToState(event, state, emit));
     on<SwipeRightEvent>(

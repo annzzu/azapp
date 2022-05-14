@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  final String hint;
   const CustomTextField({
     Key? key,
     required this.hint,
+    this.obscure = false,
+    this.onChanged,
   }) : super(key: key);
+  final String hint;
+  final bool obscure;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: TextField(
+          obscureText: obscure,
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.white,
@@ -24,7 +29,7 @@ class CustomTextField extends StatelessWidget {
               borderSide: BorderSide(color: Colors.white),
             ),
           ),
-          onChanged: (value) {}),
+          onChanged: onChanged),
     );
   }
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "801308662327",
+    "project_id": "azapp-9e58f",
+    "storage_bucket": "azapp-9e58f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801308662327:android:794d31d14a66de4aa53db2",
+        "android_client_info": {
+          "package_name": "com.example.azapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "801308662327-otgfh52ovqc5ecuev1odjfn873g1om69.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHo1u58WMkIWX9kPneooCOCpFw3SXUWTk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "801308662327-otgfh52ovqc5ecuev1odjfn873g1om69.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,8 @@
+import 'package:azapp/cubits/singup/signup_cubit.dart';
+import 'package:azapp/repositories/auth/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:azapp/widgets/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'onboarding_screens/screens.dart';
 
@@ -9,9 +12,12 @@ class OnBoardingScreen extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-      settings: const RouteSettings(name: routeName),
-      builder: (context) => const OnBoardingScreen(),
-    );
+        settings: const RouteSettings(name: routeName),
+        builder: (context) => BlocProvider(
+            create: (_) => SignupCubit(
+                authRepository: context.read<AuthRepository>()),
+          child: const OnBoardingScreen(),
+        ));
   }
 
   static const List<Tab> tabs = <Tab>[
