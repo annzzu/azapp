@@ -3,19 +3,22 @@ import 'package:flutter/material.dart';
 import '../../../config/theme/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
-  final String title;
-  final bool hasActions;
-
   const CustomAppBar({
     Key? key,
     required this.title,
     this.hasActions = true,
+    this.textColor,
+    this.isTransparent = true,
   }) : super(key: key);
+  final String title;
+  final bool hasActions;
+  final Color? textColor;
+  final bool isTransparent;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: isTransparent ? Colors.transparent : AppColors.whiteColor,
       elevation: 0,
       centerTitle: false,
       automaticallyImplyLeading: false,
@@ -33,7 +36,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       title: Text(
         title,
         style: AppColors.largeHeadline.copyWith(
-          color: AppColors.darkPurple,
+          color: textColor ?? AppColors.darkPurple,
           height: 18 / 13,
         ),
       ),

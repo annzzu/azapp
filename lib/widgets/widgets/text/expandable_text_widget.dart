@@ -18,7 +18,7 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
   late String firstHalf;
   late String secondHalf;
   bool hiddenText = true;
-  double textHeight = 1;
+  double textHeight = 60;
 
   @override
   void initState() {
@@ -43,7 +43,7 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
               color: AppColors.smokyBlack,
               height: 1.8,
             )
-          : Column(children: [
+          : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               SmallText(
                 text:
                     hiddenText ? (firstHalf + "...") : (firstHalf + secondHalf),
