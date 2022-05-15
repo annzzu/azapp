@@ -114,7 +114,14 @@ class ProfileScreen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: user.interests.length,
                     itemBuilder: (context, idx) {
-                      return CustomTextContainer(text: user.interests[idx]);
+                      return ChoiceChip(
+                        label: Text(
+                          user.interests[idx],
+                          style: AppColors.bodyText
+                              .copyWith(color: AppColors.whiteColor),
+                        ),
+                        selected: false,
+                      );
                     },
                   ),
                 ),

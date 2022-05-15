@@ -39,13 +39,16 @@ class CustomButton extends StatelessWidget {
       ),
       child: ElevatedButton(
         onPressed: () {
+          if (tabController.index == 5) {
+            Navigator.pushNamed(context, '/');
+          } else {
+            tabController.animateTo(tabController.index + 1);
+          }
           if (tabController.index == 1) {
             context.read<SignupCubit>().signUpWithCredentials();
             print(
                 "წაიკითხა და კარგად არის ${context.read<SignupCubit>().state.status}");
           }
-
-          tabController.animateTo(tabController.index + 1);
         },
         style: ElevatedButton.styleFrom(
           primary: Colors.transparent,

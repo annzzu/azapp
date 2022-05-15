@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:azapp/screens/onboarding/widgets/widgets.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
+import '../../../../config/theme/app_colors.dart';
 import '../../../../utils/size_helper.dart';
 import '../../widgets/widgets/positioned_button.dart';
 
@@ -14,6 +15,16 @@ class Bio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> firstList = [
+      'MUSIC',
+      'ECONOMICS',
+      'POLITICS',
+      'ART',
+      'NATURE',
+      'HIKING',
+      'FOOTBALL',
+      'MOVIES'
+    ];
     return Stack(
       children: [
         ListView(
@@ -28,21 +39,21 @@ class Bio extends StatelessWidget {
               const CustomTextField(hint: 'ENTER YOUR BIO'),
               const SizedBox(height: 100),
               const CustomTextHeader(text: 'What Do You Like?'),
-              Row(
-                children: const [
-                  CustomTextContainer(text: 'MUSIC'),
-                  CustomTextContainer(text: 'ECONOMICS'),
-                  CustomTextContainer(text: 'POLITICS'),
-                  CustomTextContainer(text: 'ART'),
-                ],
-              ),
-              Row(
-                children: const [
-                  CustomTextContainer(text: 'NATURE'),
-                  CustomTextContainer(text: 'HIKING'),
-                  CustomTextContainer(text: 'FOOTBALL'),
-                  CustomTextContainer(text: 'MOVIES'),
-                ],
+              Wrap(
+                children: List.generate(
+                    firstList.length,
+                    (idx) => Padding(
+                      padding: EdgeInsets.all(1),
+                      child: FilterChip(
+                            label: Text(
+                              firstList[idx],
+                              style: AppColors.bodyText
+                                  .copyWith(color: AppColors.whiteColor),
+                            ),
+                            selected: false,
+                            onSelected: (bool value) {},
+                          ),
+                    )),
               ),
             ]),
         PositionedButton(
