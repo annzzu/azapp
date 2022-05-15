@@ -28,7 +28,7 @@ class UserCard extends StatelessWidget {
                     fit: BoxFit.cover,
                     image: NetworkImage(user.imageUrls[0]),
                   ),
-                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
@@ -41,7 +41,7 @@ class UserCard extends StatelessWidget {
               ),
               Container(
                 decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
                   gradient: AppColors.userPhotoGradient,
                 ),
               ),

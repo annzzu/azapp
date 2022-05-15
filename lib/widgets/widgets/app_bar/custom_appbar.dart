@@ -18,7 +18,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: isTransparent ? Colors.transparent : AppColors.whiteColor,
+      backgroundColor:
+          isTransparent ? Colors.transparent : AppColors.whiteColor,
       elevation: 0,
       centerTitle: false,
       automaticallyImplyLeading: false,
@@ -28,10 +29,14 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
           shape: BoxShape.circle,
           gradient: AppColors.redGradient,
         ),
-        child: const Icon(
-          Icons.pets_sharp,
-          color: AppColors.whiteColor,
-        ),
+        child: IconButton(
+            icon: const Icon(
+              Icons.pets_sharp,
+              color: AppColors.whiteColor,
+            ),
+            onPressed: () {
+              Navigator.popAndPushNamed(context, RouteHelper.index);
+            }),
       ),
       title: Text(
         title,

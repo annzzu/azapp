@@ -1,4 +1,5 @@
 import 'package:azapp/config/theme/app_colors.dart';
+import 'package:azapp/screens/onboarding/widgets/widgets/custom_image_container.dart';
 import 'package:azapp/widgets/widgets/nodes/photo_node.dart';
 import 'package:flutter/material.dart';
 
@@ -22,62 +23,39 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     User user = User.users.first;
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: 'AZapp',
-        textColor: AppColors.mainRed,
-      ),
-      extendBodyBehindAppBar: false,
+      appBar: AppBar(
+          backgroundColor: AppColors.mainRed,
+          elevation: 0,
+          iconTheme: const IconThemeData(
+            color: AppColors.whiteColor,
+          )),
+      extendBodyBehindAppBar: true,
       body: ListView(
         children: [
-          Stack(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height / 4,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.vertical(
-                    bottom: Radius.circular(30.0),
-                  ),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(3, 3),
-                      blurRadius: 3,
-                      spreadRadius: 3,
-                    ),
-                  ],
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(user.imageUrls[0]),
-                  ),
+          Container(
+            decoration: const BoxDecoration(
+                borderRadius:
+                    BorderRadius.vertical(bottom: Radius.circular(40)),
+                gradient: AppColors.redGradient),
+            height: MediaQuery.of(context).size.height / 4,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: MediaQuery.of(context).size.height / 12,
+                  backgroundImage: NetworkImage(user.imageUrls[0]),
                 ),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height / 4,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  gradient: LinearGradient(
-                    colors: [
-                      Theme.of(context).primaryColor.withOpacity(0.1),
-                      Theme.of(context).primaryColor.withOpacity(0.9),
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
+                const SizedBox(
+                  width: 20,
                 ),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 40.0),
-                    child: Text(
-                      user.name,
-                      style: Theme.of(context).textTheme.headline1!.copyWith(
-                            color: Colors.white,
-                          ),
-                    ),
-                  ),
-                ),
-              )
-            ],
+                Text(
+                  user.name,
+                  style: AppColors.headline
+                      .copyWith(color: AppColors.whiteColor, height: 18 / 13),
+                )
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(20.0),
@@ -114,13 +92,17 @@ class ProfileScreen extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: user.interests.length,
                     itemBuilder: (context, idx) {
-                      return ChoiceChip(
-                        label: Text(
-                          user.interests[idx],
-                          style: AppColors.bodyText
-                              .copyWith(color: AppColors.whiteColor),
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 2),
+                        child: FilterChip(
+                          label: Text(
+                            user.interests[idx],
+                            style: AppColors.bodyText
+                                .copyWith(color: AppColors.whiteColor),
+                          ),
+                          selected: true,
+                          onSelected: (bool value) {},
                         ),
-                        selected: false,
                       );
                     },
                   ),
