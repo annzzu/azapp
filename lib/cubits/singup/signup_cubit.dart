@@ -1,7 +1,7 @@
 import 'package:azapp/utils/error_handler.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:azapp/repositories/auth/auth_repository.dart';
+import 'package:azapp/repositories/repositories.dart';
 
 part 'signup_state.dart';
 

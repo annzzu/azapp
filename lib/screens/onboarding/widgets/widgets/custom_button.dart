@@ -34,7 +34,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(10),
         gradient: AppColors.redGradient,
       ),
       child: ElevatedButton(

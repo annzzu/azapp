@@ -28,8 +28,8 @@ class User extends Equatable {
       id: snap['id'],
       name: snap['name'],
       age: snap['age'],
-      imageUrls: snap['imageUrls'],
-      interests: snap['interests'],
+      imageUrls: snap['imageUrls'].cast<String>(),
+      interests: snap['interests'].cast<String>(),
       bio: snap['bio'],
       jobTitle: snap['jobTitle'],
     );

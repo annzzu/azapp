@@ -24,12 +24,14 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       centerTitle: false,
       automaticallyImplyLeading: false,
       leading: Container(
-        margin: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(5),
+        padding: EdgeInsets.zero,
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
           gradient: AppColors.redGradient,
         ),
         child: IconButton(
+            color: AppColors.mainRed,
             icon: const Icon(
               Icons.pets_sharp,
               color: AppColors.whiteColor,

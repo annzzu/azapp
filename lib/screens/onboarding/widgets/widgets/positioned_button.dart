@@ -32,6 +32,7 @@ class PositionedButton extends StatelessWidget {
         child: Column(
           children: [
             StepProgressIndicator(
+              roundedEdges: const Radius.circular(10.0),
               totalSteps: totalSteps,
               currentStep: currentStep,
               selectedColor: AppColors.mainRed,

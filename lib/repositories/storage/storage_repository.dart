@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:azapp/repositories/database/database_repository.dart';
-import 'package:azapp/repositories/storage/base_storage_repository.dart';
+import '../database/database_repository.dart';
+import 'base_storage_repository.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 

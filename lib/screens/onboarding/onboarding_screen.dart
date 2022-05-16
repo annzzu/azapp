@@ -1,5 +1,5 @@
 import 'package:azapp/cubits/singup/signup_cubit.dart';
-import 'package:azapp/repositories/auth/auth_repository.dart';
+import 'package:azapp/repositories/repositories.dart';
 import 'package:flutter/material.dart';
 import 'package:azapp/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

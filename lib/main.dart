@@ -1,13 +1,12 @@
-import 'package:azapp/blocs/auth/auth_bloc.dart';
-import 'package:azapp/repositories/auth/auth_repository.dart';
+import 'package:azapp/repositories/repositories.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:azapp/blocs/swipe/swipe_bloc.dart';
 import 'package:azapp/config/app_router.dart';
 import 'package:azapp/screens/screens.dart';
 import 'config/theme.dart';
 import 'models/models.dart';
+import 'blocs/blocs.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +37,11 @@ class MyApp extends StatelessWidget {
               ..add(
                 LoadUsersEvent(users: User.users),
               ),
+          ),
+          BlocProvider(
+            create: (_) => ImagesBloc(
+              databaseRepository: DatabaseRepository(),
+            )..add(LoadImages()),
           ),
         ],
         child: MaterialApp(
