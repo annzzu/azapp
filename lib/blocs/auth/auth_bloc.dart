@@ -22,11 +22,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         AuthUserChanged(user: user!),
       ),
     );
-    on<AuthUserChanged>(_mapAuthUserChangedToState);
+    on<AuthUserChanged>(_onAuthUserChanged);
   }
 
-  void _mapAuthUserChangedToState(
-      AuthUserChanged event, Emitter<AuthState> emit) async {
+  void _onAuthUserChanged(
+    AuthUserChanged event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(AuthState.authenticated(user: event.user));
   }
 

@@ -19,8 +19,9 @@ class AuthRepository extends BaseAuthRepository {
       );
 
       final user = credential.user;
+      print("daregistrirda namdvilad ${user?.uid}");
       return user;
-    } catch (_) {}
+    } catch (_) {print("racxam gaweda $email");}
     return null;
   }
 

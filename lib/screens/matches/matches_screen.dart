@@ -1,7 +1,7 @@
 import 'package:azapp/config/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/models/user_match_model.dart';
+import '../../models/models.dart';
 import '../../widgets/widgets.dart';
 import '../../widgets/widgets/nodes/user_chat_node.dart';
 import '../../widgets/widgets/nodes/user_photo_name_node.dart';

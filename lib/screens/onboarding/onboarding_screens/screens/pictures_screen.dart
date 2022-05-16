@@ -1,3 +1,4 @@
+import 'package:azapp/config/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:azapp/screens/onboarding/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,9 +15,8 @@ class Pictures extends StatelessWidget {
     required this.tabController,
   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
+  displayPictures(BuildContext context, List<dynamic> images) {
+    return Column(
       children: [
         ListView(
             shrinkWrap: true,
@@ -29,31 +29,17 @@ class Pictures extends StatelessWidget {
             children: [
               const CustomTextHeader(text: 'Add 4 or More Pictures'),
               const SizedBox(height: 20),
-              BlocBuilder<ImagesBloc, ImagesState>(builder: (context, state) {
-                if (state is ImagesLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                if (state is ImagesLoaded) {
-                  var imageCount = state.imageUrls.length;
-                  return Column(
-                    children: [
-                      Wrap(
-                        children: List.generate(
-                            6,
-                            (idx) => CustomImageContainer(
-                                  imgUrl: imageCount > idx
-                                      ? state.imageUrls[idx]
-                                      : null,
-                                )),
-                      )
-                    ],
-                  );
-                } else {
-                  return const Text('Something went wrong.');
-                }
-              }),
+              Column(
+                children: [
+                  Wrap(
+                    children: List.generate(
+                        6,
+                        (idx) => CustomImageContainer(
+                              imgUrl: images.length > idx ? images[idx] : null,
+                            )),
+                  )
+                ],
+              )
             ]),
         PositionedButton(
             bottomHeight: SizeHelper.calculateSize(
@@ -63,5 +49,34 @@ class Pictures extends StatelessWidget {
             tabController: tabController)
       ],
     );
+  }
+
+  onBoardingLoaded(BuildContext context, OnBoardingLoaded state) =>
+      displayPictures(context, state.user.imageUrls);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<OnBoardingBloc, OnBoardingState>(
+        builder: (context, state) {
+      return Stack(
+        children: [
+          state is OnBoardingLoaded
+              ? const Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 70),
+                    child: CircularProgressIndicator(),
+                  ),
+                )
+              : Container(),
+          state is OnBoardingLoaded
+              ? onBoardingLoaded(context, state)
+              : const Center(
+                  child: Text(
+                  'Something went wrong.',
+                  style: AppColors.smHeadline,
+                ))
+        ],
+      );
+    });
   }
 }

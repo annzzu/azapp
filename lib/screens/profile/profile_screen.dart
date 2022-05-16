@@ -3,7 +3,7 @@ import 'package:azapp/screens/onboarding/widgets/widgets/custom_image_container.
 import 'package:azapp/widgets/widgets/nodes/photo_node.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/models/user_model.dart';
+import '../../models/models.dart';
 import '../../widgets/widgets.dart';
 
 class ProfileScreen extends StatelessWidget {

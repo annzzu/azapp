@@ -15,8 +15,6 @@ class Email extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
     return BlocBuilder<SignupCubit, SignupState>(builder: (context, state) {
       return Stack(
         children: [

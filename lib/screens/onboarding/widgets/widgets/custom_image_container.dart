@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../blocs/blocs.dart';
 import '../../../../config/theme/app_colors.dart';
-import '../../../../repositories/storage/storage_repository.dart';
 
 class CustomImageContainer extends StatelessWidget {
   const CustomImageContainer({
@@ -45,7 +46,9 @@ class CustomImageContainer extends StatelessWidget {
                       }
                       if (_image != null) {
                         print('Uploading ...');
-                        StorageRepository().uploadImage(_image);
+                        BlocProvider.of<OnBoardingBloc>(context).add(
+                          UpdateUserImages(image: _image),
+                        );
                       }
                     }),
               )

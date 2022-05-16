@@ -1,3 +1,4 @@
+import 'package:azapp/blocs/onboarding/onboarding_bloc.dart';
 import 'package:azapp/repositories/repositories.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -38,10 +39,11 @@ class MyApp extends StatelessWidget {
                 LoadUsersEvent(users: User.users),
               ),
           ),
-          BlocProvider(
-            create: (_) => ImagesBloc(
+          BlocProvider<OnBoardingBloc>(
+            create: (context) => OnBoardingBloc(
               databaseRepository: DatabaseRepository(),
-            )..add(LoadImages()),
+              storageRepository: StorageRepository(),
+            ),
           ),
         ],
         child: MaterialApp(
