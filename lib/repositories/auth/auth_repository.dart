@@ -21,12 +21,29 @@ class AuthRepository extends BaseAuthRepository {
       final user = credential.user;
       print('momxmarebeli aris $user');
       return user;
-    } catch (e) {  print('momxmarebeli არ არის $e');}
+    } catch (e) {
+      print('momxmarebeli არ არის $e');
+    }
     return null;
+  }
 
-
+  Future<void> logInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } catch (_) {}
   }
 
   @override
   Stream<auth.User?> get user => _firebaseAuth.userChanges();
+
+  @override
+  Future<void> signOut() async {
+    await _firebaseAuth.signOut();
+  }
 }

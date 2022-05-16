@@ -6,7 +6,7 @@ import 'package:azapp/models/models.dart';
 import 'package:azapp/widgets/widgets.dart';
 import 'package:azapp/blocs/blocs.dart';
 
-import '../../utils/size_helper.dart';
+import '../onboarding/onboarding_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,9 +15,20 @@ class HomeScreen extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-      settings: const RouteSettings(name: routeName),
-      builder: (context) => const HomeScreen(),
-    );
+        settings: const RouteSettings(name: routeName),
+        builder: (context) {
+          print(BlocProvider
+              .of<AuthBloc>(context)
+              .state
+              .status);
+          return BlocProvider
+              .of<AuthBloc>(context)
+              .state
+              .status ==
+              AuthStatus.unauthenticated
+              ? const OnBoardingScreen()
+              : const HomeScreen();
+        });
   }
 
   @override
@@ -31,6 +42,7 @@ class HomeScreen extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (state is SwipeLoaded) {
+            var userCount = state.users.length;
             return Column(
               children: [
                 Expanded(
@@ -46,17 +58,19 @@ class HomeScreen extends StatelessWidget {
                       data: state.users[0],
                       child: UserCard(user: state.users[0]),
                       feedback: UserCard(user: state.users[0]),
-                      childWhenDragging: UserCard(user: state.users[1]),
+                      childWhenDragging: (userCount > 1)
+                          ? UserCard(user: state.users[1])
+                          : Container(),
                       onDragEnd: (drag) {
                         if (drag.velocity.pixelsPerSecond.dx < 0) {
                           context
                               .read<SwipeBloc>()
-                              .add(SwipeLeftEvent(user: state.users[0]));
+                              .add(SwipeLeft(user: state.users[0]));
                           print('Swiped Left');
                         } else {
                           context
                               .read<SwipeBloc>()
-                              .add(SwipeRightEvent(user: state.users[0]));
+                              .add(SwipeRight(user: state.users[0]));
                           print('Swiped Right');
                         }
                       },
@@ -76,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                         onTap: () {
                           context
                               .read<SwipeBloc>()
-                              .add(SwipeRightEvent(user: state.users[0]));
+                              .add(SwipeRight(user: state.users[0]));
                           print('Swiped Right');
                         },
                         child: const ChoiceButton(
@@ -88,7 +102,7 @@ class HomeScreen extends StatelessWidget {
                         onTap: () {
                           context
                               .read<SwipeBloc>()
-                              .add(SwipeRightEvent(user: state.users[0]));
+                              .add(SwipeRight(user: state.users[0]));
                           print('Swiped Left');
                         },
                         child: const ChoiceButton(
@@ -109,7 +123,12 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             );
-          } else {
+          }else if (state is SwipeError){
+            return Center(
+              child: Text('There aren\'t any more users.',
+                  style: Theme.of(context).textTheme.headline4),
+            );
+        } {
             return const Text('Something went wrong.');
           }
         },
@@ -117,3 +136,5 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+
