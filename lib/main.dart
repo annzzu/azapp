@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:azapp/config/app_router.dart';
 import 'package:azapp/screens/screens.dart';
 import 'config/theme.dart';
+import 'cubits/singup/signup_cubit.dart';
 import 'models/models.dart';
 import 'blocs/blocs.dart';
 
@@ -32,16 +33,23 @@ class MyApp extends StatelessWidget {
               authRepository: context.read<AuthRepository>(),
             ),
           ),
+          BlocProvider<SignupCubit>(
+            create: (context) =>
+                SignupCubit(authRepository: context.read<AuthRepository>()),
+          ),
+          BlocProvider<OnBoardingBloc>(
+            create: (context) => OnBoardingBloc(
+              databaseRepository: DatabaseRepository(),
+              storageRepository: StorageRepository(),
+            ),
+          ),
           BlocProvider(
             create: (_) => SwipeBloc()
               ..add(
-                LoadUsersEvent(users: User.users),
+                LoadUsersEvent(
+                  users: User.users.where((user) => user.id != 1).toList(),
+                ),
               ),
-          ),
-          BlocProvider(
-            create: (_) => ImagesBloc(
-              databaseRepository: DatabaseRepository(),
-            )..add(LoadImages()),
           ),
         ],
         child: MaterialApp(

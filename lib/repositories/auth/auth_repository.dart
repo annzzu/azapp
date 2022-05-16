@@ -19,9 +19,12 @@ class AuthRepository extends BaseAuthRepository {
       );
 
       final user = credential.user;
+      print('momxmarebeli aris $user');
       return user;
-    } catch (_) {}
+    } catch (e) {  print('momxmarebeli არ არის $e');}
     return null;
+
+
   }
 
   @override

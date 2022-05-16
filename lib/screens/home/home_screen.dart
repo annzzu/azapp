@@ -6,6 +6,8 @@ import 'package:azapp/models/models.dart';
 import 'package:azapp/widgets/widgets.dart';
 import 'package:azapp/blocs/blocs.dart';
 
+import '../../utils/size_helper.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -31,38 +33,41 @@ class HomeScreen extends StatelessWidget {
           } else if (state is SwipeLoaded) {
             return Column(
               children: [
-                InkWell(
-                  onDoubleTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      RouteHelper.users,
-                      arguments: state.users[0],
-                    );
-                  },
-                  child: Draggable<User>(
-                    data: state.users[0],
-                    child: UserCard(user: state.users[0]),
-                    feedback: UserCard(user: state.users[0]),
-                    childWhenDragging: UserCard(user: state.users[1]),
-                    onDragEnd: (drag) {
-                      if (drag.velocity.pixelsPerSecond.dx < 0) {
-                        context
-                            .read<SwipeBloc>()
-                            .add(SwipeLeftEvent(user: state.users[0]));
-                        print('Swiped Left');
-                      } else {
-                        context
-                            .read<SwipeBloc>()
-                            .add(SwipeRightEvent(user: state.users[0]));
-                        print('Swiped Right');
-                      }
+                Expanded(
+                  child: InkWell(
+                    onDoubleTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        RouteHelper.users,
+                        arguments: state.users[0],
+                      );
                     },
+                    child: Draggable<User>(
+                      data: state.users[0],
+                      child: UserCard(user: state.users[0]),
+                      feedback: UserCard(user: state.users[0]),
+                      childWhenDragging: UserCard(user: state.users[1]),
+                      onDragEnd: (drag) {
+                        if (drag.velocity.pixelsPerSecond.dx < 0) {
+                          context
+                              .read<SwipeBloc>()
+                              .add(SwipeLeftEvent(user: state.users[0]));
+                          print('Swiped Left');
+                        } else {
+                          context
+                              .read<SwipeBloc>()
+                              .add(SwipeRightEvent(user: state.users[0]));
+                          print('Swiped Right');
+                        }
+                      },
+                    ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 60,
+                  padding: const EdgeInsets.only(
+                    left: 8,
+                    right: 8,
+                    bottom: 5,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

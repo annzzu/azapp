@@ -1,8 +1,10 @@
+import 'package:azapp/blocs/blocs.dart';
 import 'package:flutter/material.dart';
 import 'package:azapp/screens/onboarding/widgets/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../config/theme/app_colors.dart';
 import '../../../../utils/size_helper.dart';
-import '../../widgets/widgets/positioned_button.dart';
 
 class Location extends StatelessWidget {
   final TabController tabController;
@@ -12,8 +14,7 @@ class Location extends StatelessWidget {
     required this.tabController,
   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
+  onLocation(BuildContext context, OnBoardingLoaded state) {
     return Stack(
       children: [
         ListView(
@@ -37,5 +38,29 @@ class Location extends StatelessWidget {
         )
       ],
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<OnBoardingBloc, OnBoardingState>(
+        builder: (context, state) {
+      Widget? loading = state is OnBoardingLoading
+          ? const Center(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 70),
+                child: CircularProgressIndicator(),
+              ),
+            )
+          : null;
+      Widget loaded = state is OnBoardingLoaded
+          ? onLocation(context, state)
+          : const Center(
+              child: Text(
+              'Something went wrong.',
+              style: AppColors.smHeadline,
+            ));
+
+      return loading ?? loaded;
+    });
   }
 }

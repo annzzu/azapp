@@ -4,7 +4,6 @@ import 'package:azapp/screens/onboarding/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../cubits/singup/signup_cubit.dart';
-import '../../widgets/widgets/positioned_button.dart';
 
 class Email extends StatelessWidget {
   const Email({
@@ -15,8 +14,6 @@ class Email extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
     return BlocBuilder<SignupCubit, SignupState>(builder: (context, state) {
       return Stack(
         children: [

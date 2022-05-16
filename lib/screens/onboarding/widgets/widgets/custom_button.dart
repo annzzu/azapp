@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../cubits/singup/signup_cubit.dart';
+import 'package:azapp/blocs/blocs.dart';
+import 'package:azapp/cubits/singup/signup_cubit.dart';
+import 'package:azapp/models/models.dart' as models;
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -38,16 +40,34 @@ class CustomButton extends StatelessWidget {
         gradient: AppColors.redGradient,
       ),
       child: ElevatedButton(
-        onPressed: () {
+        onPressed: () async {
           if (tabController.index == 5) {
             Navigator.pushNamed(context, '/');
           } else {
             tabController.animateTo(tabController.index + 1);
           }
-          if (tabController.index == 1) {
-            context.read<SignupCubit>().signUpWithCredentials();
-            print(
-                "წაიკითხა და კარგად არის ${context.read<SignupCubit>().state.status}");
+          if (tabController.index == 2) {
+            await context.read<SignupCubit>().signUpWithCredentials();
+            print("status ${context.read<SignupCubit>().state.status}");
+
+            String? uid = context.read<SignupCubit>().state.user!.uid;
+            print("status paroli $uid");
+            models.User user = models.User(
+              id: uid,
+              name: '',
+              age: 0,
+              gender: '',
+              imageUrls: [],
+              jobTitle: '',
+              interests: [],
+              bio: '',
+              location: '',
+            );
+            context.read<OnBoardingBloc>().add(
+                  StartOnBoarding(
+                    user: user,
+                  ),
+                );
           }
         },
         style: ElevatedButton.styleFrom(
