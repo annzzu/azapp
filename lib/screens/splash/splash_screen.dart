@@ -1,12 +1,10 @@
 import 'dart:async';
-
+import 'package:azapp/config/theme/app_colors.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:azapp/blocs/blocs.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../blocs/auth/auth_bloc.dart';
-import '../../config/theme/app_colors.dart';
 import '../login/login_screen.dart';
 import '/screens/screens.dart';
 
@@ -31,8 +29,8 @@ class SplashScreen extends StatelessWidget {
           print("Listener");
           if (state.status == AuthStatus.unauthenticated) {
             Timer(
-              const Duration(seconds: 1),
-                  () => Navigator.of(context).pushNamed(
+              const Duration(seconds: 3),
+              () => Navigator.of(context).pushNamed(
                 LoginScreen.routeName,
                 // ModalRoute.withName('/login'),
               ),
@@ -40,7 +38,7 @@ class SplashScreen extends StatelessWidget {
           } else if (state.status == AuthStatus.authenticated) {
             print("has autentication");
             Timer(
-              const Duration(seconds: 1),
+              const Duration(seconds: 3),
               () => Navigator.of(context).pushNamed(HomeScreen.routeName),
             );
           }
@@ -50,15 +48,19 @@ class SplashScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.pets_sharp,
-                  color: AppColors.scarletRed,
-                  size: 50,
+                Container(
+                  width: 100,
+                  height: 100,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage('assets/ic_launcher.png')),
+                  ),
                 ),
                 const SizedBox(height: 20),
-                Text(
+                const Text(
                   'AZAPP',
-                  style: Theme.of(context).textTheme.headline1,
+                  style: AppColors.headline,
                 )
               ],
             ),

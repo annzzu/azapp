@@ -4,9 +4,12 @@ import 'package:azapp/widgets/widgets/nodes/photo_node.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../blocs/auth/auth_bloc.dart';
 import '../../blocs/profile/profile_bloc.dart';
 import '../../models/models/user_model.dart';
+import '../../repositories/auth/auth_repository.dart';
 import '../../widgets/widgets.dart';
+import '../login/login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({
@@ -16,9 +19,15 @@ class ProfileScreen extends StatelessWidget {
 
   static Route route() {
     return MaterialPageRoute(
-      settings: const RouteSettings(name: routeName),
-      builder: (context) => const ProfileScreen(),
-    );
+        settings: RouteSettings(name: routeName),
+        builder: (context) {
+          print(BlocProvider.of<AuthBloc>(context).state);
+
+          return BlocProvider.of<AuthBloc>(context).state.status ==
+              AuthStatus.unauthenticated
+              ? LoginScreen()
+              : ProfileScreen();
+        });
   }
 
   profile(BuildContext context, ProfileLoaded state) {
@@ -42,7 +51,7 @@ class ProfileScreen extends StatelessWidget {
                 width: 20,
               ),
               Text(
-                user.name,
+                user.name.isNotEmpty ? user.name :  'test user' ,
                 style: AppColors.headline
                     .copyWith(color: AppColors.whiteColor, height: 18 / 13),
               )
@@ -73,7 +82,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               const TitleWithIconRow(title: 'Location', icon: Icons.edit),
               Text(
-                'Singapore, 1 Shenton Way',
+                user.location.isNotEmpty ? user.location : 'Singapore, 1 Shenton Way',
                 style: AppColors.bodyText.copyWith(height: 1.5),
               ),
               const TitleWithIconRow(title: 'Interests', icon: Icons.edit),
@@ -88,7 +97,7 @@ class ProfileScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 2),
                       child: FilterChip(
                         label: Text(
-                          user.interests[idx],
+                          user.interests[idx].toString(),
                           style: AppColors.bodyText
                               .copyWith(color: AppColors.whiteColor),
                         ),
@@ -97,6 +106,22 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     );
                   },
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  RepositoryProvider.of<AuthRepository>(context)
+                      .signOut();
+                },
+                child: Center(
+                  child: Text(
+                    'Sign Out',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline5!
+                        .copyWith(
+                        color: Theme.of(context).primaryColor),
+                  ),
                 ),
               ),
             ],
@@ -115,21 +140,18 @@ class ProfileScreen extends StatelessWidget {
           iconTheme: const IconThemeData(
             color: AppColors.whiteColor,
           )),
-      extendBodyBehindAppBar: true,
-      body: SingleChildScrollView(
-        child: BlocBuilder<ProfileBloc, ProfileState>(
-          builder: (context, state) {
-            if (state is ProfileLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (state is ProfileLoaded) {
-              return profile(context, state);
-            } else {
-              return Text('Something went wrong.');
-            }
-          },
-        ),
+      body: BlocBuilder<ProfileBloc, ProfileState>(
+        builder: (context, state) {
+          if (state is ProfileLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is ProfileLoaded) {
+            return profile(context, state);
+          } else {
+            return Text('Something went wrong.');
+          }
+        },
       ),
     );
   }

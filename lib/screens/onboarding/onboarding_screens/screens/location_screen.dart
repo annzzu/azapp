@@ -24,9 +24,18 @@ class Location extends StatelessWidget {
               top: 50,
               bottom: 90,
             ),
-            children: const [
+            children:  [
               CustomTextHeader(text: 'Where Are You?'),
-              CustomTextField(hint: 'ENTER YOUR LOCATION'),
+              CustomTextField(hint: 'ENTER YOUR LOCATION',
+                onChanged: (value) {
+                  context.read<OnBoardingBloc>().add(
+                    UpdateUser(
+                      user: state.user.copyWith(location: value),
+                    ),
+                  );
+                },
+                obscure: true,
+              ),
             ]),
         PositionedButton(
           bottomHeight: SizeHelper.calculateSize(

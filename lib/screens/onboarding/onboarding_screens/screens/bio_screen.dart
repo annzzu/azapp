@@ -13,6 +13,29 @@ class Bio extends StatelessWidget {
   }) : super(key: key);
   final TabController tabController;
 
+  checkList(
+    BuildContext context,
+    OnBoardingLoaded state,
+    bool value,
+    String interest,
+  ) {
+    List<dynamic>? result = <dynamic>[];
+    if (state.user.interests.contains(interest as dynamic)) {
+      result = (value
+          ? state.user.interests
+          : state.user.interests.remove(interest as dynamic)) as List?;
+    } else {
+      result = (value
+          ? state.user.interests.add(interest as dynamic)
+          : state.user.interests) as List?;
+    }
+    context.read<OnBoardingBloc>().add(UpdateUser(
+          user: state.user.copyWith(
+            interests: result,
+          ),
+        ));
+  }
+
   onBio(BuildContext context, OnBoardingLoaded state) {
     List<String> firstList = [
       'MUSIC',
@@ -57,8 +80,14 @@ class Bio extends StatelessWidget {
                               style: AppColors.bodyText
                                   .copyWith(color: AppColors.whiteColor),
                             ),
-                            selected: false,
-                            onSelected: (bool value) {},
+                            selected: state.user.interests
+                                .contains(firstList[idx] as dynamic),
+                            onSelected: (bool value) => checkList(
+                              context,
+                              state,
+                              value,
+                              firstList[idx],
+                            ),
                           ),
                         )),
               ),

@@ -6,6 +6,7 @@ import '/repositories/repositories.dart';
 import '/models/models.dart';
 
 part 'onboarding_event.dart';
+
 part 'onboarding_state.dart';
 
 class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
