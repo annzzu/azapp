@@ -73,7 +73,7 @@ class UsersScreen extends StatelessWidget {
                               InkWell(
                                 onTap: () {
                                   context.read<SwipeBloc>().add(
-                                      SwipeRightEvent(user: state.users[0]));
+                                      SwipeRight(user: state.users[0]));
                                   Navigator.pop(context);
                                   print('Swiped Right');
                                 },
@@ -85,7 +85,7 @@ class UsersScreen extends StatelessWidget {
                               InkWell(
                                 onTap: () {
                                   context.read<SwipeBloc>().add(
-                                      SwipeRightEvent(user: state.users[0]));
+                                      SwipeRight(user: state.users[0]));
                                   Navigator.pop(context);
                                   print('Swiped Left');
                                 },

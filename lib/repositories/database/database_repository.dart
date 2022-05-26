@@ -17,6 +17,20 @@ class DatabaseRepository extends BaseDatabaseRepository {
   }
 
   @override
+  Stream<List<User>> getUsers(
+    String userId,
+    String gender,
+  ) {
+    return _firebaseFirestore
+        .collection('users')
+        .where('gender', isNotEqualTo: gender)
+        .snapshots()
+        .map((snap) {
+      return snap.docs.map((doc) => User.fromSnapshot(doc)).toList();
+    });
+  }
+
+  @override
   Future<void> createUser(User user) async {
     await _firebaseFirestore.collection('users').doc(user.id).set(user.toMap());
 

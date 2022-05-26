@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:azapp/config/app_router.dart';
 import 'package:azapp/screens/screens.dart';
 import 'config/theme.dart';
+import 'cubits/login/login_cubit.dart';
 import 'cubits/singup/signup_cubit.dart';
-import 'models/models.dart';
 import 'blocs/blocs.dart';
 
 void main() async {
@@ -23,13 +23,19 @@ class MyApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-          create: (_) => AuthRepository(),
-        )
+          create: (context) => AuthRepository(),
+        ),
+        RepositoryProvider(
+          create: (context) => DatabaseRepository(),
+        ),
+        RepositoryProvider(
+          create: (context) => StorageRepository(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) => AuthBloc(
+            create: (context) => AuthBloc(
               authRepository: context.read<AuthRepository>(),
             ),
           ),
@@ -37,18 +43,30 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 SignupCubit(authRepository: context.read<AuthRepository>()),
           ),
+          BlocProvider<LoginCubit>(
+            create: (context) =>
+                LoginCubit(authRepository: context.read<AuthRepository>()),
+          ),
           BlocProvider<OnBoardingBloc>(
             create: (context) => OnBoardingBloc(
-              databaseRepository: DatabaseRepository(),
-              storageRepository: StorageRepository(),
+              databaseRepository: context.read<DatabaseRepository>(),
+              storageRepository: context.read<StorageRepository>(),
             ),
           ),
           BlocProvider(
-            create: (_) => SwipeBloc()
-              ..add(
-                LoadUsersEvent(
-                  users: User.users.where((user) => user.id != 1).toList(),
-                ),
+              create: (context) => SwipeBloc(
+                    authBloc: BlocProvider.of<AuthBloc>(context),
+                    databaseRepository: context.read<DatabaseRepository>(),
+                  )
+              //BlocProvider.of<AuthBloc>(context).state.user!.uid),
+              ),
+          BlocProvider(
+            create: (context) => ProfileBloc(
+              authBloc: BlocProvider.of<AuthBloc>(context),
+              databaseRepository: context.read<DatabaseRepository>(),
+            )..add(
+                LoadProfile(
+                    userId: BlocProvider.of<AuthBloc>(context).state.user!.uid),
               ),
           ),
         ],
@@ -57,7 +75,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: theme(),
           onGenerateRoute: AppRouter.onGenerateRoute,
-          initialRoute: OnBoardingScreen.routeName,
+          initialRoute: SplashScreen.routeName,
         ),
       ),
     );
