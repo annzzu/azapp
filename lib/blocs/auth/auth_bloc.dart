@@ -35,9 +35,4 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     _userSubscription?.cancel();
     return super.close();
   }
-}abstract class AuthEvent extends Equatable {
-  const AuthEvent();
-
-  @override
-  List<Object> get props => [];
 }

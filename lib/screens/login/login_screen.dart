@@ -7,17 +7,17 @@ import '/screens/screens.dart';
 import '/cubits/cubits.dart';
 
 class LoginScreen extends StatelessWidget {
+  const LoginScreen({Key? key}) : super(key: key);
   static const String routeName = '/login';
 
   static Route route() {
     return MaterialPageRoute(
-      settings: RouteSettings(name: routeName),
+      settings: const RouteSettings(name: routeName),
       builder: (context) {
-        print(BlocProvider.of<AuthBloc>(context).state.status);
         return BlocProvider.of<AuthBloc>(context).state.status ==
                 AuthStatus.unauthenticated
-            ? LoginScreen()
-            : HomeScreen();
+            ? const LoginScreen()
+            : const HomeScreen();
       },
     );
   }
@@ -25,8 +25,8 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'ARROW',
+      appBar: const CustomAppBar(
+        title: 'AZapp',
         hasActions: false,
       ),
       body: Padding(
@@ -34,15 +34,22 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            EmailInput(),
+            const EmailInput(),
             const SizedBox(height: 10),
-            PasswordInput(),
+            const PasswordInput(),
             const SizedBox(height: 10),
             CustomElevatedButton(
               text: 'LOGIN',
               textColor: Theme.of(context).primaryColor,
               onPressed: () {
                 context.read<LoginCubit>().logInWithCredentials();
+                return BlocProvider.of<AuthBloc>(context).state.status ==
+                    AuthStatus.unauthenticated
+                    ? print("error")
+                    : Navigator.of(context).pushNamedAndRemoveUntil(
+                  HomeScreen.routeName,
+                  ModalRoute.withName('/'),
+                );
               },
               beginColor: Colors.white,
               endColor: Colors.white,
@@ -66,6 +73,8 @@ class LoginScreen extends StatelessWidget {
 }
 
 class EmailInput extends StatelessWidget {
+  const EmailInput({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(
@@ -83,6 +92,8 @@ class EmailInput extends StatelessWidget {
 }
 
 class PasswordInput extends StatelessWidget {
+  const PasswordInput({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(

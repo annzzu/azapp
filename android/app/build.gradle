@@ -46,9 +46,12 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+//        minSdkVersion localProperties.getProperty('flutter.minSdkVersion').toInteger()
+//        targetSdkVersion flutter.targetSdkVersion
+
         applicationId "com.example.azapp"
         minSdkVersion localProperties.getProperty('flutter.minSdkVersion').toInteger()
-        targetSdkVersion flutter.targetSdkVersion
+        targetSdkVersion localProperties.getProperty('flutter.targetSdkVersion').toInteger()
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

@@ -6,6 +6,8 @@ import 'package:azapp/blocs/blocs.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../blocs/auth/auth_bloc.dart';
+import '../../config/theme/app_colors.dart';
+import '../login/login_screen.dart';
 import '/screens/screens.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -30,12 +32,13 @@ class SplashScreen extends StatelessWidget {
           if (state.status == AuthStatus.unauthenticated) {
             Timer(
               const Duration(seconds: 1),
-              () => Navigator.of(context).pushNamedAndRemoveUntil(
-                OnBoardingScreen.routeName,
-                ModalRoute.withName('/onboarding'),
+                  () => Navigator.of(context).pushNamed(
+                LoginScreen.routeName,
+                // ModalRoute.withName('/login'),
               ),
             );
           } else if (state.status == AuthStatus.authenticated) {
+            print("has autentication");
             Timer(
               const Duration(seconds: 1),
               () => Navigator.of(context).pushNamed(HomeScreen.routeName),
@@ -47,13 +50,14 @@ class SplashScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.asset(
-                  'assets/logo.svg',
-                  height: 100,
+                const Icon(
+                  Icons.pets_sharp,
+                  color: AppColors.scarletRed,
+                  size: 50,
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'ARROW',
+                  'AZAPP',
                   style: Theme.of(context).textTheme.headline1,
                 )
               ],
